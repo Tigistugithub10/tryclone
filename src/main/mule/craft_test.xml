@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="ad2e4a36-7a7b-4a9d-986c-7eb82a28ddfe" />
+	<http:request-config name="HTTP_Request_configuration1" doc:name="HTTP Request configuration" doc:id="5dd39929-d4f5-4ba5-975d-6564bf2cbc78" >
+		<http:request-connection host="jsonplaceholder.typicode.com" />
+	</http:request-config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b9dcd223-d4ed-4df3-90d7-99d96ee2929a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="craft_testFlow" doc:id="c13ec393-8b77-41b5-8c78-9cc48505e6ae" >
+		<http:listener doc:name="Listener" doc:id="ad328e4f-2f8a-44cf-9452-e93ec041f59a" config-ref="HTTP_Listener_config" path="/test"/>
+		<set-payload value="example" doc:name="Set Payload" doc:id="1a568d80-f113-41b1-a996-bec0b13206a4" />
+		<logger level="INFO" doc:name="Logger" doc:id="f07ab89f-a199-4e3c-809c-941482ec70ef" message="end logger"/>
+	</flow>
+	<flow name="craft_testFlow1" doc:id="e5d9debf-ee42-4e25-8467-a91f1a10cd75" >
+		<http:request method="GET" doc:name="Request" doc:id="7574271f-5426-4cc1-b397-8b8e38886235" config-ref="HTTP_Request_configuration1" path="/users"/>
+	</flow>
+</mule>
